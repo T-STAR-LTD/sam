@@ -26,7 +26,12 @@ from sam.sam_jax.models import wide_resnet_shakeshake
 
 
 _AVAILABLE_MODEL_NAMES = [
+    'WideResnet16x10',
+    'WideResnet16x8',
+    'WideResnet22x10',
+    'WideResnet22x8',
     'WideResnet28x10',
+    'WideResnet28x8',
     'WideResnet28x6_ShakeShake',
     'Pyramid_ShakeDrop',
     'WideResnet_mini',  # For testing/debugging purposes.
@@ -89,6 +94,31 @@ def get_model(
     module = wide_resnet.WideResnet.partial(
         blocks_per_group=4,
         channel_multiplier=10,
+        num_outputs=num_classes)
+  elif model_name == 'WideResnet28x8':
+    module = wide_resnet.WideResnet.partial(
+        blocks_per_group=4,
+        channel_multiplier=8,
+        num_outputs=num_classes)
+  elif model_name == 'WideResnet22x10':
+    module = wide_resnet.WideResnet.partial(
+        blocks_per_group=3,
+        channel_multiplier=10,
+        num_outputs=num_classes)
+  elif model_name == 'WideResnet22x8':
+    module = wide_resnet.WideResnet.partial(
+        blocks_per_group=3,
+        channel_multiplier=8,
+        num_outputs=num_classes)
+  elif model_name == 'WideResnet16x10':
+    module = wide_resnet.WideResnet.partial(
+        blocks_per_group=2,
+        channel_multiplier=10,
+        num_outputs=num_classes)
+  elif model_name == 'WideResnet16x8':
+    module = wide_resnet.WideResnet.partial(
+        blocks_per_group=2,
+        channel_multiplier=8,
         num_outputs=num_classes)
   elif model_name == 'WideResnet28x6_ShakeShake':
     module = wide_resnet_shakeshake.WideResnetShakeShake.partial(
